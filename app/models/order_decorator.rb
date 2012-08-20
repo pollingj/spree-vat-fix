@@ -1,4 +1,4 @@
-Order.class_eval do
+Spree::Order.class_eval do
 
   after_create :create_tax_charge!
   
@@ -26,7 +26,7 @@ Order.class_eval do
   def create_tax_charge!
     #puts "Adjustments #{adjustments} TAX #{tax_total}"
     #puts "CREATE TAX for #{ship_address}  "
-    all_rates = TaxRate.all
+    all_rates = Spree::TaxRate.all
     matching_rates = all_rates.select { |rate| rate.zone.include?(ship_address) }
     if matching_rates.empty?
       matching_rates = all_rates.select{|rate| # get all rates that apply to default country 

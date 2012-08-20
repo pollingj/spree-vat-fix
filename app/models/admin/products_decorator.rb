@@ -1,4 +1,4 @@
-Admin::ProductsHelper.module_eval do
+Spree::Admin::ProductsHelper.module_eval do
   # returns the price of the product to show for display purposes
   def product_price(product_or_variant, options={})
     options.assert_valid_keys(:format_as_currency, :show_vat_text)
@@ -10,7 +10,7 @@ Admin::ProductsHelper.module_eval do
   end
 end
 
-Admin::ProductsController.class_eval do
+Spree::Admin::ProductsController.class_eval do
   before_filter :vat_fix , :only => :update
   
   def vat_fix

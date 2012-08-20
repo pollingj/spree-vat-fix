@@ -1,16 +1,16 @@
-TaxRate.class_eval do 
+Spree::TaxRate.class_eval do 
   def is_default?
     self.tax_category.is_default
   end
 end
 
-Calculator::Vat.class_eval do
+Spree::Calculator::Vat.class_eval do
 
 
   # list the vat rates for the default country
   def self.default_rates
-    origin = Country.find(Spree::Config[:default_country_id])
-    calcs = Calculator::Vat.find(:all, :include => {:calculable => :zone}).select {
+    origin = Spree::Country.find(Spree::Config[:default_country_id])
+    calcs = Spree::Calculator::Vat.find(:all, :include => {:calculable => :zone}).select {
       |vat| vat.calculable.zone.country_list.include?(origin)
     }
     puts "DEFAULT RATES #{calcs.collect { |calc| calc.calculable.amount }.join(' ')}"
@@ -19,8 +19,8 @@ Calculator::Vat.class_eval do
 
   # list the vat rates for the default country
   def self.default_rates
-    origin = Country.find(Spree::Config[:default_country_id])
-    calcs = Calculator::Vat.find(:all, :include => {:calculable => :zone}).select {
+    origin = Spree::Country.find(Spree::Config[:default_country_id])
+    calcs = Spree::Calculator::Vat.find(:all, :include => {:calculable => :zone}).select {
       |vat| vat.calculable.zone.country_list.include?(origin)
     }
     #puts "DEFAULT RATES #{calcs.collect { |calc| calc.calculable.amount }.join(' ')}"
