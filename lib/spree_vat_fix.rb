@@ -12,10 +12,4 @@ module SpreeVatFix
     config.to_prepare &method(:activate).to_proc
   end
 end
-class Hooks < Spree::ThemeSupport::HookListener
-  insert_before :admin_product_form_right do 
-    "<%=product_price(@product)%> Reverse <%= t('vat')%> 
-    <input type='checkbox' name='price_includes_vat' value='true'/>     "
-  end
-end
 
